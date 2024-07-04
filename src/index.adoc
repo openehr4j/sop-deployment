@@ -1,0 +1,17 @@
+= Document Template
+:toc: auto
+:imagesdir: ./img
+
+== Summary
+
+TBD
+
+[[glossary]]
+== Glossary
+
+include::glossary/index.adoc[]
+
+[discrete]
+== Legal notice
+
+TBD

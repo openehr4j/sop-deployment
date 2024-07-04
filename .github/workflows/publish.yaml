@@ -1,0 +1,25 @@
+name: Publish
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith('openehr4j/', github.repository) }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Add git configuration"
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "github-action-bot@experimental-software.com"
+      - name: Compile and publish
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          BUILD_DIR=$(mktemp -d)
+          ./compile.sh -v ${TAG_NAME} -b ${BUILD_DIR}
+          ./.github/scripts/publish.sh -v ${TAG_NAME} -b ${BUILD_DIR}
