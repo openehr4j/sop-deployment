@@ -61,7 +61,13 @@ function has_untracked_files() {
 }
 
 function remove_untracked_files() {
-  rm $(git ls-files --others --exclude-standard) && rmdir ./src/img 2> /dev/null
+  local UNTRACKED_FILES=$(git ls-files --others --exclude-standard)
+  if [[ ! -z "${UNTRACKED_FILES}" ]]; then
+    rm "${UNTRACKED_FILES}"
+    if [[ -d ./src/img ]]; then
+      rmdir ./src/img 2> /dev/null
+    fi
+  fi
 }
 
 ###############################################################################
@@ -81,7 +87,7 @@ if [[ -d ./build ]]; then
 fi
 mkdir ./build
 find src -name "img" -exec cp -r {} ./build \;
-docker run -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor ./src/index.adoc --out-file ./build/quality-manual.html
+docker run -v $(pwd):/documents/ asciidoctor/docker-asciidoctor asciidoctor ./src/index.adoc --out-file ./build/sop-deployment.html
 if [[ ${BUILD_DIR} != "./build" ]] ; then
   mv ./build ${BUILD_DIR}/html
 else
@@ -95,5 +101,5 @@ echo "Compile PDF"
 echo
 find src -name "img" -exec cp -r {} ./src \;
 mkdir ${BUILD_DIR}/pdf
-docker run -v $(pwd):/documents/ -v ${BUILD_DIR}/pdf:/target asciidoctor/docker-asciidoctor asciidoctor-pdf ./src/index.adoc --out-file /target/quality-manual.pdf
+docker run -v $(pwd):/documents/ -v ${BUILD_DIR}/pdf:/target asciidoctor/docker-asciidoctor asciidoctor-pdf ./src/index.adoc --out-file /target/sop-deployment.pdf
 remove_untracked_files

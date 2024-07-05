@@ -1,4 +1,6 @@
 = SOP Deployment
+:toc: auto
+:imagesdir: ./img
 
 == 1. General Information
 
