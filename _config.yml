@@ -1,5 +1,5 @@
 remote_theme: pages-themes/modernist@v0.2.0
 plugins:
   - jekyll-remote-theme
-title: Document Template
-description: TBD
+title: SOP Deployment
+description:  Process for initial integration and update of integrations
