@@ -66,7 +66,7 @@ git fetch origin
 git checkout gh-pages
 
 mv ${BUILD_DIR} ./${VERSION}
-echo "| ${VERSION} | ${TODAY} | [quality-manual.html](./${VERSION}/html/quality-manual.html) | [quality-manual.pdf](./${VERSION}/pdf/quality-manual.pdf) |" \
+echo "| ${VERSION} | ${TODAY} | [sop-deployment.html](./${VERSION}/html/sop-deployment.html) | [sop-deployment.pdf](./${VERSION}/pdf/sop-deployment.pdf) |" \
   >> index.md
 git add .
 git commit -m "Add release artifacts for version ${VERSION}"
