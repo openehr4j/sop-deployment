@@ -7,7 +7,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: ${{ startsWith('openehr4j/', github.repository) }}
     permissions:
       contents: write
     steps:
